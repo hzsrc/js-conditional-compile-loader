@@ -1,7 +1,7 @@
-{
+ï»¿{
   "name": "js-conditional-compile-loader",
-  "version": "1.0.7",
-  "description": "A javascript conditional compile loader for webpack. Ò»¸öjavascriptÌõ¼ş±àÒëµÄwebpack loader¡£",
+  "version": "1.0.8",
+  "description": "A javascript conditional compile loader for webpack. ä¸€ä¸ªjavascriptæ¡ä»¶ç¼–è¯‘çš„webpack loaderã€‚",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No test specified\" && exit 1"
