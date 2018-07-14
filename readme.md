@@ -2,7 +2,7 @@
 
 A javascript conditional compile loader for webpack. You can easily output two different codes for debug or release environment with one source code.(一个javascript条件编译的webpack loader。可以很容易用一套代码实现debug和release环境输出两套不同js代码的。)
 
-###Usage in JS files
+### Usage in JS files
 Just use it like this(这样用就行)：
 
     /*IFDEBUG Any js here FIDEBUG*/
@@ -23,10 +23,10 @@ or
 
 Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.(因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。)
 
-###Setup
+### Setup
     npm i -D js-conditional-compile-loader
 
-###Config in webpack
+### Config in webpack
 You should change webpack config like this（你需要像这样修改webpack配置）:
 
     module: {
@@ -48,7 +48,7 @@ You should change webpack config like this（你需要像这样修改webpack配�
         ]
     }
 
-##options
+### options
 - isDebug: {bool = [process.env.NODE_ENV == 'development']}
 
  If isDebug === false, all the codes between "/\*IFDEBUG" and "FIDEBUG\*/" will be removed, otherwise the codes will be remained. （如果isDebug === false，所有"/\*IFDEBUG" 和 "FIDEBUG\*/"之间的代码都会被移除。 其他情况，这些代码则会被保留。）
