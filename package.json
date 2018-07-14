@@ -1,0 +1,25 @@
+{
+  "name": "js-conditional-compile-loader",
+  "version": "1.0.6",
+  "description": "A javascript conditional compile loader for webpack. 一个javascript条件编译的webpack loader。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "webpack",
+    "javascript",
+    "ifdebug",
+    "conditional",
+    "compile"
+  ],
+  "author": {
+    "name": "James.Huang",
+    "email": "hz932@qq.com",
+    "url": "http://www.hz300.com/js-conditional-compile-loader/"
+  },
+  "license": "MIT",
+  "readme": "readme.md"
+}
