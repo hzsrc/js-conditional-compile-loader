@@ -27,7 +27,8 @@ Since it is designed by a js comment style, the code can run normaly even though
     npm i -D js-conditional-compile-loader
 
 ### Config in webpack
-You should change webpack config like this（你需要像这样修改webpack配置）:
+You should change webpack config like this（你需要像这样修改webpack配置）: 
+See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
 
     module: {
         rules: [
