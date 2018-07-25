@@ -9,22 +9,22 @@ Just use it like this(这样用就行)：
 
 Start with "/\*IFDEBUG", end with"FIDEBUG\*/", and js code in the center. you can use it any where in js files. (以“/\*IFDEBUG”开头，以“FIDEBUG\*/”结尾，中间是js代码。可以用在js文件的任意地方。)
 
-sample:
+* sample:
 
-	$state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
+ 	  $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
 	
 Output for debug:
 
-	$state.go('win', {dir: menu.winId, reload: true })
+ 	$state.go('win', {dir: menu.winId, reload: true })
 
 Output of production:
 
 	$state.go('win', {dir: menu.winId})
 	
-or like this
+* sample2:
 
 	var tx = "This is app /*IFDEBUG of debug FIDEBUG*/ here";
-or
+* sample3:
 
 	/*IFDEBUG
 		alert('Hi~');
