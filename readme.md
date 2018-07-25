@@ -23,12 +23,12 @@ Output of production:
 	
 * sample2:
 
-	var tx = "This is app /*IFDEBUG of debug FIDEBUG*/ here";
+	  var tx = "This is app /*IFDEBUG of debug FIDEBUG*/ here";
 * sample3:
 
-	/*IFDEBUG
-		alert('Hi~');
-	FIDEBUG*/
+	  /*IFDEBUG
+	  	alert('Hi~');
+	  FIDEBUG*/
 
 Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.(因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。)
 
