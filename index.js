@@ -1,4 +1,5 @@
 var loaderUtils = require('loader-utils');
+var REG = /\/\*\s*IFDEBUG([\s\S]+?)FIDEBUG\s*\*\//g;
 
 module.exports = function (source) {
     var opts = Object.assign(
@@ -10,6 +11,5 @@ module.exports = function (source) {
 
 function replaceIfDebug(js, opt) {
     var isDebug = opt.isDebug !== false;
-    var reg = /\/\*\s*IFDEBUG([\s\S]+?)FIDEBUG\s*\*\//g;
-    return js.replace(reg, isDebug ? '$1' : '');
+    return js.replace(REG, isDebug ? '$1' : '');
 }
