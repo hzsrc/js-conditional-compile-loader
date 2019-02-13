@@ -10,6 +10,6 @@ module.exports = function (source) {
 
 function replaceIfDebug(js, opt) {
     var isDebug = opt.isDebug !== false;
-    var reg = /\/\*IFDEBUG([\s\S]+?)FIDEBUG\*\//g;
+    var reg = /\/\*\s*IFDEBUG([\s\S]+?)FIDEBUG\s*\*\//g;
     return js.replace(reg, isDebug ? '$1' : '');
 }
