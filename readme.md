@@ -70,3 +70,37 @@ See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-e
 （如果isDebug === false，所有"/\*IFDEBUG" 和 "FIDEBUG\*/"之间的代码都会被移除。 其他情况，这些代码则会被保留。）
 
 	
+## Samples
+* 1
+```js
+Vue.component('debugInfo', {
+    template: ''
+    /* IFDEBUG
+        + '<pre style="font-size:13px;font-family:\'Courier\',\'Courier New\';z-index:9999;line-height: 1.1;position: fixed;top:0;right:0; pointer-events: none">{{JSON.stringify($attrs.info || "", null, 4).replace(/"(\\w+)":/g, "$1:")}}</pre>'
+    FIDEBUG */
+    ,
+    watch: {
+      /* IFDEBUG
+      curRule (v){
+          this.ruleData = v
+      },
+      FIDEBUG */
+    },
+});
+```
+
+* 2
+```javascript
+  import { Layout } from 'my-layout-component'
+  var LayoutRun = Layout
+  /* IFDEBUG
+      import FpLayoutLocal from '../../local-code/my-layout-component/src/components/layout.vue'
+      LayoutRun = FpLayoutLocal
+  FIDEBUG */
+
+  export default {
+    components: {
+      LayoutRun
+    },
+  }
+```
