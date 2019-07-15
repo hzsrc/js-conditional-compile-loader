@@ -18,6 +18,7 @@ or
 ````
 Start with "/\*IFDEBUG", end with"FIDEBUG\*/", and js code in the center. you can use it any where in js files.     
 
+----
 * sample -- sorce code:
 ````js
 $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
@@ -31,6 +32,7 @@ Output of production:
 ````js
 $state.go('win', {dir: menu.winId})
 ````
+----
 
 * sample2:
 ````js
