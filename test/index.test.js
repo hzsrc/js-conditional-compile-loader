@@ -37,7 +37,7 @@ test('Divided false', () => {
 
 test('performance', () => {
   var start = new Date()
-  var src = fs.readFileSync(resolve('cases/perform.js'), 'utf-8')
+  var src = fs.readFileSync(resolve('cases/perform.txt'), 'utf-8')
   for (var i = 0; i < 30; i++) {
     src = '' + Math.random() + new Date() + src
     replacer.replaceMatched(src, { isDebug: false, myFlag: false })
