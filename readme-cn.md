@@ -1,5 +1,7 @@
 # js-conditional-compile-loader
 
+- [English](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme.md)
+
 一个javascript条件编译的webpack loader。
 条件编译指按照需要，按照环境设置的条件，选择性地编译或不编译指定的代码。
 比如：用一套代码实现debug和release环境输出两套不同js程序。
@@ -97,11 +99,11 @@ Vue.component('debugInfo', {
     FIDEBUG */
     ,
     watch: {
-      /* IFDEBUG
+      /* IFTRUE_myFlag
       curRule (v){
           this.ruleData = v
       },
-      FIDEBUG */
+      FITRUE_myFlag */
     },
 });
 ```

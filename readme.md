@@ -1,5 +1,7 @@
 # js-conditional-compile-loader
 
+- [中文文档](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme-cn.md)
+
 A javascript conditional compiling loader for webpack. 
 Conditional compiling means that we can compile or not compile some js code according to some environment variables.
 For example: we can output two different program for debug or release environment with a same source code project.    
@@ -98,11 +100,11 @@ Vue.component('debugInfo', {
     FIDEBUG */
     ,
     watch: {
-      /* IFDEBUG
+      /* IFTRUE_myFlag
       curRule (v){
           this.ruleData = v
       },
-      FIDEBUG */
+      FITRUE_myFlag */
     },
 });
 ```
