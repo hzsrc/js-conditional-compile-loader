@@ -18,19 +18,21 @@ or
 ````
 以“/\*IFDEBUG”开头，以“FIDEBUG\*/”结尾，中间是js代码。可以用在js文件的任意地方。
 
-* sample -- sorce code:
+----
+* 样例源码:
 ````js
 $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
 ````
-Output for debug:
+测试环境下输出的内容:
 ````js
 $state.go('win', {dir: menu.winId, reload: true })
 ````
 
-Output of production:
+生产环境下输出的内容:
 ````js
 $state.go('win', {dir: menu.winId})
 ````
+----
 
 * sample2:
 ````js
