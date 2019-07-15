@@ -1,20 +1,20 @@
 # js-conditional-compile-loader
 
-A javascript conditional compiling loader for webpack. 
-Conditional compiling means that we can compile or not compile some js code according to some environment variables.
-For example: we can output two different program for debug or release environment with a same source code project.    
+一个javascript条件编译的webpack loader。
+条件编译指按照需要，按照环境设置的条件，选择性地编译或不编译指定的代码。
+比如：用一套代码实现debug和release环境输出两套不同js程序。
 
 ### Usage
-Just use it anywhere in js code like this:    
+这样用就行：
 
 ````js
-/* IFDEBUG Any js here FIDEBUG */
+    /*IFDEBUG Any js here FIDEBUG*/
 ````
 or
 ````js
 /* IFTRUE_yourFlagName ...js code... FITRUE_yourFlagName */
 ````
-Start with "/\*IFDEBUG", end with"FIDEBUG\*/", and js code in the center. you can use it any where in js files.     
+以“/\*IFDEBUG”开头，以“FIDEBUG\*/”结尾，中间是js代码。可以用在js文件的任意地方。
 
 * sample -- sorce code:
 ````js
@@ -41,15 +41,15 @@ var tx = "This is app /* IFTRUE_Ali of debug FITRUE_Ali */ here";
 alert('Hi~');
 FIDEBUG*/
 ````
-Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.    
+因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。
 
-### Setup
+### 安装
 ````bash
     npm i -D js-conditional-compile-loader
 ````
 
-### Config in webpack
-You should change webpack config like this:    
+### webpack配置
+你需要像这样修改webpack配置:     
 See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
 
 ````js
@@ -66,11 +66,11 @@ module: {
                 'babel-loader?cacheDirectory',
                 //step-1
                 {
-                  loader: 'js-conditional-compile-loader',
-                  options: {
-                    isDebug: process.env.NODE_ENV === 'development', // optional, this is default
-                    myFlag: process.env.ENV_COMPANY === 'ALI',  // any name you want, used for /* IFTRUE_myFlag ...js code... FITRUE_myFlag */
-                  }
+                    loader: 'js-conditional-compile-loader',
+                    options: {
+                        isDebug: process.env.NODE_ENV === 'development', // optional, this is default
+                        myFlag: process.env.ENV_COMPANY === 'ALI', // any name, used for /* IFTRUE_myFlag ...js code... FITRUE_myFlag */
+                    }
                 },
             ]
         },
@@ -81,14 +81,13 @@ module: {
 ### options
 - isDebug: {bool = [process.env.NODE_ENV === 'development']}
 
- If isDebug === false, all the codes between `/\*IFDEBUG` and `FIDEBUG\*/` will be removed, otherwise the codes will be remained.     
+如果isDebug === false，所有`/\*IFDEBUG` 和 `FIDEBUG\*/`之间的代码都会被移除。 其他情况，这些代码则会被保留。
 
-- \[any propertyName\]：{bool}
-if value === false, all codes between `/\* IFTRUE_propertyName` and `FITRUE_propertyName \*/` will be removed, otherwise the codes will be remained.
-
+- 任意属性名：{bool}
+如果 value === false，所有`/\* IFTRUE_属性名` 和 `FITRUE_属性名 \*/`之间的代码都会被移除。 其他情况，这些代码则会被保留。
 
 	
-## Samples
+## 用法举例
 * 1
 ```js
 Vue.component('debugInfo', {

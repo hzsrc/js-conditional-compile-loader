@@ -1,15 +1,25 @@
 var loaderUtils = require('loader-utils');
-var REG = /\/\*\s*IFDEBUG([\s\S]+?)FIDEBUG\s*\*\//g;
+var REG = /\/\*\s*IF(DEBUG|TRUE\w+)([\s\S]+?)FI\1\s*\*\//g;
 
 module.exports = function (source) {
-    var opts = Object.assign(
-        {isDebug: process.env.NODE_ENV === 'development'}, //默认isDebug
-        loaderUtils.getOptions(this)
-    );
-    return replaceIfDebug(source, opts)
+  var options = Object.assign(
+    { isDebug: process.env.NODE_ENV === 'development' }, //默认的isDebug
+    loaderUtils.getOptions(this)
+  );
+  return replaceMatched(source, options)
 };
+module.exports._rp = replaceMatched
+module.exports._reg = REG
 
-function replaceIfDebug(js, opt) {
-    var isDebug = opt.isDebug !== false;
-    return js.replace(REG, isDebug ? '$1' : '');
+function replaceMatched(js, options) {
+  return js.replace(REG, (match, $1, $2) => {
+    var isDropCode;
+    if ($1 === 'DEBUG') {
+      isDropCode = options.isDebug === false
+    } else {
+      var varName = $1.slice(5)
+      isDropCode = options[varName] === false
+    }
+    return isDropCode ? '' : $2
+  });
 }
