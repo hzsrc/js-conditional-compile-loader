@@ -2,13 +2,16 @@
 
 - [中文文档](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme-cn.md)
 
-A javascript conditional compiling loader for webpack. 
-Conditional compiling means that we can compile or not compile some js code according to some environment variables.
+A javascript conditional compiling loader for webpack.    
+Conditional compiling means that we can compile or not compile some js code according to some environment variables.   
 For example: we can output two different program for debug or release environment with a same source code project.    
 
 ### Usage
 Just use it anywhere in js code like this:    
-
+Start with `/*IFDEBUG` or `/*IFTRUE_xxx`, end with `FIDEBUG*/` or `FITRUE_xxx*/`, place js code in the center. you can use it any where in js files.
+     
+- Mode 1 - comment all   
+Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.    
 ````js
 /* IFDEBUG Any js here FIDEBUG */
 ````
@@ -16,36 +19,44 @@ or
 ````js
 /* IFTRUE_yourFlagName ...js code... FITRUE_yourFlagName */
 ````
-Start with "/\*IFDEBUG", end with"FIDEBUG\*/", and js code in the center. you can use it any where in js files.     
+
+- Mode 2 -- head and foot   
+In this mode, you can use eslint to check your code.
+````js
+/* IFDEBUG */
+var anyJsHere = 'Any js here'
+/*FIDEBUG */
+````
+or
+````js
+/* IFTRUE_yourFlagName*/ 
+function anyJsHere(){
+}
+/*FITRUE_yourFlagName */
+````
 
 ----
-* sample -- sorce code:
+### Build result with source code
+Source code:
 ````js
+/* IFTRUE_forAlibaba */
+var aliCode = require('./ali/alibaba-business.js')
+aliCode.doSomething()
+/* FITRUE_forAlibaba */
 $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
 ````
-Output for debug:
+Compiled output by options: `{isDebug: true, forAlibaba: true}`:
 ````js
+var aliCode = require('./ali/alibaba-business.js')
+aliCode.doSomething()
 $state.go('win', {dir: menu.winId, reload: true })
 ````
 
-Output of production:
+Compiled output by options: `{isDebug: false, forAlibaba: false}`:
 ````js
 $state.go('win', {dir: menu.winId})
 ````
 ----
-
-* sample2:
-````js
-var tx = "This is app /* IFTRUE_Ali of debug FITRUE_Ali */ here";
-````
-
-* sample3:
-````js
-/*IFDEBUG
-alert('Hi~');
-FIDEBUG*/
-````
-Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.    
 
 ### Setup
 ````bash
@@ -62,9 +73,6 @@ module: {
         {
             test: /\.js$/,
             include: [resolve('src'), resolve('test')],
-            exclude: file => (
-                /node_modules/.test(file) && !/\.vue\.js/.test(file)
-            ),
             use: [
                 //step-2
                 'babel-loader?cacheDirectory',
@@ -72,7 +80,7 @@ module: {
                 {
                   loader: 'js-conditional-compile-loader',
                   options: {
-                    isDebug: process.env.NODE_ENV === 'development', // optional, this is default
+                    isDebug: process.env.NODE_ENV === 'development', // optional, this expression is default
                     myFlag: process.env.ENV_COMPANY === 'ALI',  // any name you want, used for /* IFTRUE_myFlag ...js code... FITRUE_myFlag */
                   }
                 },
@@ -93,7 +101,21 @@ if value === false, all codes between `/\* IFTRUE_propertyName` and `FITRUE_prop
 
 	
 ## Samples
-* 1
+
+* 1:
+````js
+var tx = "This is app /* IFTRUE_Ali of debug FITRUE_Ali */ here";
+````
+
+* 2:
+````js
+/*IFDEBUG
+alert('Hi~');
+FIDEBUG*/
+````
+
+
+* 3
 ```js
 Vue.component('debugInfo', {
     template: ''
@@ -102,27 +124,27 @@ Vue.component('debugInfo', {
     FIDEBUG */
     ,
     watch: {
-      /* IFTRUE_myFlag
+      /* IFTRUE_myFlag */
       curRule (v){
           this.ruleData = v
       },
-      FITRUE_myFlag */
+      /*FITRUE_myFlag */
     },
 });
 ```
 
-* 2
+* 4
 ```javascript
 import { Layout } from 'my-layout-component'
 var LayoutRun = Layout
 /* IFDEBUG
-  import FpLayoutLocal from '../../local-code/my-layout-component/src/components/layout.vue'
-  LayoutRun = FpLayoutLocal
+  import LayoutLocal from '../../local-code/my-layout-component/src/components/layout.vue'
+  LayoutRun = LayoutLocal
 FIDEBUG */
 
 export default {
-components: {
-  LayoutRun
-},
+    components: {
+      LayoutRun
+    },
 }
 ```

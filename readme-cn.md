@@ -2,13 +2,15 @@
 
 - [English](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme.md)
 
-一个javascript条件编译的webpack loader。
-条件编译指按照需要，按照环境设置的条件，选择性地编译或不编译指定的代码。
+一个javascript条件编译的webpack loader。   
+条件编译指按照需要，按照环境设置的条件，选择性地编译或不编译指定的代码。   
 比如：用一套代码实现debug和release环境输出两套不同js程序。
 
 ### Usage
 这样用就行：
-
+以`/*IFDEBUG`、`/*IFTRUE_xxx`开头，以`FIDEBUG*/`、`FITRUE_xxx*/`结尾，中间是js代码。可以用在js文件的任意地方。
+- 模式1 - 全注释:   
+因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。
 ````js
     /*IFDEBUG Any js here FIDEBUG*/
 ````
@@ -16,36 +18,46 @@ or
 ````js
 /* IFTRUE_yourFlagName ...js code... FITRUE_yourFlagName */
 ````
-以“/\*IFDEBUG”开头，以“FIDEBUG\*/”结尾，中间是js代码。可以用在js文件的任意地方。
+- 模式2（首+尾）：   
+这种模式下，可使用eslint校验你的代码。
+````js
+/* IFDEBUG */
+var anyJsHere = 'Any js here'
+/*FIDEBUG */
+````
+or
+````js
+/* IFTRUE_yourFlagName*/ 
+function anyJsHere(){
+}
+/*FITRUE_yourFlagName */
+````
 
 ----
-* 样例源码:
+### 由源码输出的结果
+源码：
 ````js
+/* IFTRUE_forAlibaba */
+var aliCode = require('./ali/alibaba-business.js')
+aliCode.doSomething()
+/* FITRUE_forAlibaba */
+
 $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
 ````
-测试环境下输出的内容:
+options为`{isDebug: true, forAlibaba: true}`时，构建后输出的内容:
 ````js
+var aliCode = require('./ali/alibaba-business.js')
+aliCode.doSomething()
+
 $state.go('win', {dir: menu.winId, reload: true })
 ````
 
-生产环境下输出的内容:
+options为`{isDebug: false, forAlibaba: false}`时，构建后输出的内容:
 ````js
 $state.go('win', {dir: menu.winId})
 ````
 ----
 
-* sample2:
-````js
-var tx = "This is app /* IFTRUE_Ali of debug FITRUE_Ali */ here";
-````
-
-* sample3:
-````js
-/*IFDEBUG
-alert('Hi~');
-FIDEBUG*/
-````
-因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。
 
 ### 安装
 ````bash
@@ -62,9 +74,6 @@ module: {
         {
             test: /\.js$/,
             include: [resolve('src'), resolve('test')],
-            exclude: file => (
-                /node_modules/.test(file) && !/\.vue\.js/.test(file)
-            ),
             use: [
                 //step-2
                 'babel-loader?cacheDirectory',
@@ -92,7 +101,20 @@ module: {
 
 	
 ## 用法举例
-* 1
+
+* 1:
+````js
+var tx = "This is app /* IFTRUE_Ali of debug FITRUE_Ali */ here";
+````
+
+* 2:
+````js
+/*IFDEBUG
+alert('Hi~');
+FIDEBUG*/
+````
+
+* 3
 ```js
 Vue.component('debugInfo', {
     template: ''
@@ -101,16 +123,16 @@ Vue.component('debugInfo', {
     FIDEBUG */
     ,
     watch: {
-      /* IFTRUE_myFlag
+      /* IFTRUE_myFlag */
       curRule (v){
           this.ruleData = v
       },
-      FITRUE_myFlag */
+      /*FITRUE_myFlag */
     },
 });
 ```
 
-* 2
+* 4
 ```javascript
 import { Layout } from 'my-layout-component'
 var LayoutRun = Layout
@@ -120,8 +142,8 @@ var LayoutRun = Layout
 FIDEBUG */
 
 export default {
-components: {
-  LayoutRun
-},
+    components: {
+      LayoutRun
+    },
 }
 ```
