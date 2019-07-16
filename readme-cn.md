@@ -14,7 +14,7 @@
 ````js
     /*IFDEBUG Any js here FIDEBUG*/
 ````
-or
+
 ````js
 /* IFTRUE_yourFlagName ...js code... FITRUE_yourFlagName */
 ````
@@ -25,7 +25,7 @@ or
 var anyJsHere = 'Any js here'
 /*FIDEBUG */
 ````
-or
+
 ````js
 /* IFTRUE_yourFlagName*/ 
 function anyJsHere(){
@@ -44,7 +44,7 @@ aliCode.doSomething()
 
 $state.go('win', {dir: menu.winId /*IFDEBUG , reload: true FIDEBUG*/})
 ````
-options为`{isDebug: true, forAlibaba: true}`时，构建后输出的内容:
+当options为`{isDebug: true, forAlibaba: true}`时，构建后输出的内容:
 ````js
 var aliCode = require('./ali/alibaba-business.js')
 aliCode.doSomething()
@@ -52,7 +52,7 @@ aliCode.doSomething()
 $state.go('win', {dir: menu.winId, reload: true })
 ````
 
-options为`{isDebug: false, forAlibaba: false}`时，构建后输出的内容:
+当options为`{isDebug: false, forAlibaba: false}`时，构建后输出的内容:
 ````js
 $state.go('win', {dir: menu.winId})
 ````
@@ -65,7 +65,7 @@ $state.go('win', {dir: menu.winId})
 ````
 
 ### webpack配置
-你需要像这样修改webpack配置:     
+这样修改webpack配置:     
 See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
 
 ````js
