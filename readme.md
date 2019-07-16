@@ -15,7 +15,7 @@ Since it is designed by a js comment style, the code can run normaly even though
 ````js
 /* IFDEBUG Any js here FIDEBUG */
 ````
-or
+
 ````js
 /* IFTRUE_yourFlagName ...js code... FITRUE_yourFlagName */
 ````
@@ -27,7 +27,7 @@ In this mode, you can use eslint to check your code.
 var anyJsHere = 'Any js here'
 /*FIDEBUG */
 ````
-or
+
 ````js
 /* IFTRUE_yourFlagName*/ 
 function anyJsHere(){
@@ -64,9 +64,9 @@ $state.go('win', {dir: menu.winId})
 ````
 
 ### Config in webpack
-You should change webpack config like this:    
+Change webpack config like this:    
 See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
-
+`js-conditional-compile-loader` needs to be add as step 1 for js files.
 ````js
 module: {
     rules: [
