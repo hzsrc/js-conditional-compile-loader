@@ -66,7 +66,8 @@ $state.go('win', {dir: menu.winId})
 
 ### webpack配置
 这样修改webpack配置:     
-See this sample: vue-element-ui-scaffold-webpack4(https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
+查看样例： [vue-element-ui-scaffold-webpack4](https://github.com/hzsrc/vue-element-ui-scaffold-webpack4)
+`js-conditional-compile-loader`需要作为处理js文件的第一步。
 
 ````js
 module: {
