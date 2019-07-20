@@ -2,14 +2,14 @@ var REG = /\/\*\s*IF(DEBUG|TRUE_\w+)(?:\s*\*\/)?([\s\S]+?)(?:\/\*\s*)?FI\1\s*\*\
 
 exports.replaceMatched = function (js, options) {
   return js.replace(REG, (match, $1, $2) => {
-    var isDropCode;
+    var isKeep;
     if ($1 === 'DEBUG') {
-      isDropCode = options.isDebug === false
+      isKeep = options.isDebug
     } else {
       var varName = $1.slice(5)
-      isDropCode = options[varName] === false
+      isKeep = options[varName]
     }
-    return isDropCode ? '' : $2
+    return isKeep ? $2 : ''
   });
 }
 
