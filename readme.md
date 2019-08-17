@@ -3,12 +3,11 @@
 - [中文文档](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme-cn.md)
 
 A javascript conditional compiling loader for webpack.    
-Conditional compiling means that we can compile or not compile some js code according to some environment variables.   
+Conditional compiling means that we can use the same codes and compiling process, to build different applications with different  environment conditions.   
 For example: we can output two different program for debug or release environment with a same source code project.    
 
 ### Usage
-Just use it anywhere in js code like this:    
-Start with `/*IFDEBUG` or `/*IFTRUE_xxx`, end with `FIDEBUG*/` or `FITRUE_xxx*/`, place js code in the center. you can use it any where in js files.
+This loader provides two commands: `IFDEBUG` and `IFTRUE`. Just use them anywhere in js code like this: Start with `/*IFDEBUG` or `/*IFTRUE_xxx`, end with `FIDEBUG*/` or `FITRUE_xxx*/`, place js code in the center. The `xxx` is any condition property of the options in webpack, such like `myFlag`.
      
 - Mode 1 - comment all   
 Since it is designed by a js comment style, the code can run normaly even though the js-conditional-compile-loader is not used.    
