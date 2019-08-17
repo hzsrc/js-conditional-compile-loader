@@ -3,7 +3,7 @@
 - [English](https://github.com/hzsrc/js-conditional-compile-loader/blob/master/readme.md)
 
 一个javascript条件编译的webpack loader。   
-条件编译指按照需要，按照环境设置的条件，选择性地编译或不编译指定的代码。   
+条件编译，是指 用同一套代码和同样的编译构建过程，根据设置的条件，选择性地编译指定的代码，从而输出不同程序的过程。  
 比如：用一套代码实现debug和release环境输出两套不同js程序。
 
 ### 用法
