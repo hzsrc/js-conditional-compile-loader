@@ -7,7 +7,7 @@
 比如：用一套代码实现debug和release环境输出两套不同js程序。
 
 ### 用法
-插件提供了IFDEBUG和IFTRUE两个条件编译指令。用法是：在js代码的任意地方以`/*IFDEBUG`或`/*IFTRUE_xxx`开头，以`FIDEBUG*/`或`FITRUE_xxx*/`结尾，中间是被包裹的js代码。xxx是在webpack中指定的条件属性名，如上面的myFlag。
+插件提供了`IFDEBUG`和`IFTRUE`两个条件编译指令。用法是：在js代码的任意地方以`/*IFDEBUG`或`/*IFTRUE_xxx`开头，以`FIDEBUG*/`或`FITRUE_xxx*/`结尾，中间是被包裹的js代码。`xxx`是在webpack中指定的options条件属性名，比如`myFlag`。
 
 - 模式1 - 全注释:   
 因为采用了js注释的形式，故即使不使用js-conditional-compile-loader，也不影响js代码的运行逻辑。
