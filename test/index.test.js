@@ -12,46 +12,48 @@ var resolve = path.resolve.bind(null, __dirname)
 // })
 
 test('IFDEBUG true', () => {
-  testOne('cases/IFDEBUG.js', { isDebug: true }, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/IFDEBUG.js', { isDebug: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 
 test('IFDEBUG false', () => {
-  testOne('cases/IFDEBUG.js', { isDebug: false }, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/IFDEBUG.js', { isDebug: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 test('IFTRUE myFlag=true', () => {
-  testOne('cases/IFTRUE.js', { myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/IFTRUE.js', { myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 test('IFTRUE myFlag=false', () => {
-  testOne('cases/IFTRUE.js', { myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/IFTRUE.js', { myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 
 test('Divided true', () => {
-  testOne('cases/Divided.js', { isDebug: true, myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/Divided.js', { isDebug: true, myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 test('Divided false', () => {
-  testOne('cases/Divided.js', { isDebug: false, myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/Divided.js', { isDebug: false, myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 
 test('performance', () => {
-  var start = new Date()
-  var src = fs.readFileSync(resolve('cases/perform.txt'), 'utf-8')
-  for (var i = 0; i < 30; i++) {
-    src = '' + Math.random() + new Date() + src
-    replacer.replaceMatched(src, { isDebug: false, myFlag: false })
-    replacer.replaceMatched(src, { isDebug: true, myFlag: true })
-    replacer.replaceMatched(src, { isDebug: false, myFlag: true })
-    replacer.replaceMatched(src, { isDebug: true, myFlag: false })
-  }
-  var spent = new Date() - start
-  expect(spent).toBeLessThan(1000)
+    var start = new Date()
+    var src = fs.readFileSync(resolve('cases/perform.txt'), 'utf-8')
+    for (var i = 0; i < 30; i++) {
+        src = '' + Math.random() + new Date() + src
+        replacer.replaceMatched(src, { isDebug: false, myFlag: false })
+        replacer.replaceMatched(src, { isDebug: true, myFlag: true })
+        replacer.replaceMatched(src, { isDebug: false, myFlag: true })
+        replacer.replaceMatched(src, { isDebug: true, myFlag: false })
+    }
+    var spent = new Date() - start
+    expect(spent).toBeLessThan(1000)
 })
 
 function testOne(file, options, reg, notReg) {
-  var src = fs.readFileSync(resolve(file), 'utf-8')
-  var result = replacer.replaceMatched(src, options)
-  expect(result).toMatch(reg)
-  expect(result).not.toMatch(replacer._reg)
+    var src = fs.readFileSync(resolve(file), 'utf-8')
+    var result = replacer.replaceMatched(src, options)
+    // fs.writeFileSync(resolve('./dist/' + path.basename(file)), result)
+
+    expect(result).toMatch(reg)
+    expect(result).not.toMatch(replacer._reg)
 }
