@@ -7,7 +7,9 @@
     "test": "jest",
     "prepublish": "npm test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "loader-utils": "*"
+  },
   "keywords": [
     "webpack",
     "javascript",
