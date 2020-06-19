@@ -83,7 +83,7 @@ module: {
                     loader: 'js-conditional-compile-loader',
                     options: {
                         isDebug: process.env.NODE_ENV === 'development', // optional, this is default
-                        myFlag: process.env.npm_config_myflag, // 任何属性名。此处对 /* IFTRUE_myFlag ...js code... FITRUE_myFlag */ 有效，当执行:npm run build --myflag 时启用。
+                        myFlag: process.env.npm_config_myflag, // Any prop name. Here is used for `/* IFTRUE_myFlag ...js code... FITRUE_myFlag */` ，it is enabled when running command: `npm run build --myflag` .
                     }
                 },
             ]
