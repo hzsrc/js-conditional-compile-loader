@@ -83,7 +83,7 @@ module: {
                     loader: 'js-conditional-compile-loader',
                     options: {
                         isDebug: process.env.NODE_ENV === 'development', // optional, this is default
-                        myFlag: process.env.ENV_COMPANY === 'ALI', // any name, used for /* IFTRUE_myFlag ...js code... FITRUE_myFlag */
+                        myFlag: process.env.npm_config_myflag, // 任何属性名。此处对 /* IFTRUE_myFlag ...js code... FITRUE_myFlag */ 有效，当执行:npm run build --myflag 时启用。
                     }
                 },
             ]
