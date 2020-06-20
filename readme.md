@@ -7,6 +7,7 @@ A conditional compiling loader for webpack, support any source files like js, ts
 **Conditional compiling** means that we can use the same codes and compiling process, to build different applications with different  environment conditions.   
 - For example: we can output two different program for debug or release environment with a same source code project.    
 - Another sample: Use same codes and compiling process to supply different customers, just by using different building command args, like this: `npm run build --ali` for alibaba, `npm run build --tencent` for tencent。
+![image](https://hzsrc.github.io/js-conditional-compile-loader/intro.png)
 
 ### Usage
 This loader provides two directives: `IFDEBUG` and `IFTRUE`. Just use them anywhere in js code like this: Start with `/*IFDEBUG` or `/*IFTRUE_xxx`, end with `FIDEBUG*/` or `FITRUE_xxx*/`, place js code in the center. The `xxx` is any condition property of the options in webpack, such like `myFlag`.
