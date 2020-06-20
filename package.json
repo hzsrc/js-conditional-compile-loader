@@ -1,7 +1,7 @@
 {
   "name": "js-conditional-compile-loader",
   "version": "1.0.14",
-  "description": "A javascript conditional compile loader for webpack. 一个javascript条件编译的webpack loader。",
+  "description": "A conditional compiling loader for webpack, support js,ts,css,scss,vue. 一个条件编译的webpack loader，支持js,ts,css,scss,vue等。",
   "main": "index.js",
   "scripts": {
     "test": "jest",

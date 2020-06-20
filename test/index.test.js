@@ -37,6 +37,23 @@ test('Divided false', () => {
 })
 
 
+test('Vue true', () => {
+    testOne('cases/css-ts-vue.vue', { isDebug: true, myFlag: true }, [
+        /This is a test!/,
+        /falgData: 'Flag Data'/,
+        /any-where-test/,
+        /test-for-css/,
+    ])
+})
+test('Vue false', () => {
+    testOne('cases/css-ts-vue.vue', { isDebug: false, myFlag: false }, [
+        /<div>\s+<\/div>/,
+        / data: {\s+}/,
+        /<\/script>\s+<style id=/,
+        /scoped>\s+<\/style>/,
+    ])
+})
+
 test('performance', () => {
     var start = new Date()
     var src = fs.readFileSync(resolve('cases/perform.txt'), 'utf-8')
@@ -58,12 +75,11 @@ test('IFDEBUG default ifDebug', () => {
     testOne('cases/IFDEBUG.js', {}, /font-size:13px[\s\S]+this.ruleData/)
 })
 
-function testOne(file, options, reg, notReg) {
+function testOne(file, options, reg) {
     var src = fs.readFileSync(resolve(file), 'utf-8')
-    var result = mockPlugin(src, options)
+    var result = mockPlugin(src, options);
     // fs.writeFileSync(resolve('./dist/' + path.basename(file)), result)
-
-    expect(result).toMatch(reg)
+    [].concat(reg).map(r => expect(result).toMatch(r))
     expect(result).not.toMatch(replacer._reg)
 }
 
