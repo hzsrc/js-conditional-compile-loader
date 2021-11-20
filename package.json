@@ -8,7 +8,7 @@
     "prepublish": "npm test"
   },
   "dependencies": {
-    "loader-utils": "*"
+    "loader-utils": "^2.0.0"
   },
   "keywords": [
     "webpack",
