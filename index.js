@@ -9,7 +9,7 @@ module.exports = function (source) {
     }
     source = replacer.replaceMatched(source, options)
     // changeSource 可修改内容
-    if(options.changeSource){
+    if (options.changeSource) {
         source = options.changeSource(source, options)
     }
     return source
