@@ -115,9 +115,7 @@ module.exports = {
 Custom function to change source code. Optional. Sample: change `.aspx` to `.do` for java backend:
 ````js
 var options = {
-    changeSource: process.env.npm_config_java ? function changeSource(source, options) {
-        return options.isJava ? source.replace(/\.aspx\b/i, '.do') : source
-    } : null
+    changeSource: process.env.npm_config_java ? source => source.replace(/\.aspx\b/i, '.do') : null
 }
 ````
 

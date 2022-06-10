@@ -14,26 +14,26 @@ var resolve = path.resolve.bind(null, __dirname)
 
 
 test('IFDEBUG true', () => {
-    testOne('cases/IFDEBUG.js', {isDebug: true}, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/IFDEBUG.js', { isDebug: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 
 test('IFDEBUG false', () => {
-    testOne('cases/IFDEBUG.js', {isDebug: false}, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/IFDEBUG.js', { isDebug: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 test('IFTRUE myFlag=true', () => {
-    testOne('cases/IFTRUE.js', {myFlag: true}, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/IFTRUE.js', { myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 test('IFTRUE myFlag=false', () => {
-    testOne('cases/IFTRUE.js', {myFlag: false}, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/IFTRUE.js', { myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 
 test('Divided true', () => {
-    testOne('cases/Divided.js', {isDebug: true, myFlag: true}, /font-size:13px[\s\S]+this.ruleData/)
+    testOne('cases/Divided.js', { isDebug: true, myFlag: true }, /font-size:13px[\s\S]+this.ruleData/)
 })
 test('Divided false', () => {
-    testOne('cases/Divided.js', {isDebug: false, myFlag: false}, /template: ''\s+,\s+watch: \{\s+\}/)
+    testOne('cases/Divided.js', { isDebug: false, myFlag: false }, /template: ''\s+,\s+watch: \{\s+\}/)
 })
 
 
@@ -59,10 +59,10 @@ test('performance', () => {
     var src = fs.readFileSync(resolve('cases/perform.txt'), 'utf-8')
     for (var i = 0; i < 100; i++) {
         src = '' + Math.random() + new Date() + src
-        mockPlugin(src, {isDebug: false, myFlag: false})
-        mockPlugin(src, {isDebug: true, myFlag: true})
-        mockPlugin(src, {isDebug: false, myFlag: true})
-        mockPlugin(src, {isDebug: true, myFlag: false})
+        mockPlugin(src, { isDebug: false, myFlag: false })
+        mockPlugin(src, { isDebug: true, myFlag: true })
+        mockPlugin(src, { isDebug: false, myFlag: true })
+        mockPlugin(src, { isDebug: true, myFlag: false })
     }
     var spent = new Date() - start
     expect(spent).toBeLessThan(1000)
@@ -75,6 +75,14 @@ test('IFDEBUG default ifDebug', () => {
     testOne('cases/IFDEBUG.js', {}, /font-size:13px[\s\S]+this.ruleData/)
 })
 
+test('changeSource', () => {
+    testOne('cases/changeSource.js', {
+        changeSource(source) {
+            return source.replace(/\.aspx\b/i, '.do')
+        }
+    }, /home\.do\b/)
+})
+
 function testOne(file, options, reg) {
     var src = fs.readFileSync(resolve(file), 'utf-8')
     var result = mockPlugin(src, options);
@@ -84,5 +92,5 @@ function testOne(file, options, reg) {
 }
 
 function mockPlugin(src, option) {
-    return plugin.call({query: option}, src)
+    return plugin.call({ query: option }, src)
 }

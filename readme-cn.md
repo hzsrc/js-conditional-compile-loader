@@ -119,9 +119,7 @@ module.exports = {
 自定义的修改源码函数。可选。比如对于后端为java环境时，将代码中的`.aspx`替换为`.do`：
 ````js
 var options = {
-    changeSource: process.env.npm_config_java ? function changeSource(source, options) {
-        return options.isJava ? source.replace(/\.aspx\b/i, '.do') : source
-    } : null
+    changeSource: process.env.npm_config_java ? source => source.replace(/\.aspx\b/i, '.do') : null
 }
 ````
 
