@@ -110,6 +110,18 @@ module.exports = {
  If `isDebug` === false, all the codes between `/\*IFDEBUG` and `FIDEBUG\*/` will be removed, otherwise the codes will be remained.    
  Defualt value of `isDebug` is set by: process.env.NODE_ENV === 'development'  
 
+- changeSource: Function(source, options)
+
+Custom function to change source code. Optional. Sample: change `.aspx` to `.do` for java backend:
+````js
+var options = {
+    changeSource: process.env.npm_config_java ? function changeSource(source, options) {
+        return options.isJava ? source.replace(/\.aspx\b/i, '.do') : source
+    } : null
+}
+````
+
+
 - \[any propertyName\]：{bool}
 if [propertyValue] === false, all codes between `/\* IFTRUE_propertyName` and `FITRUE_propertyName \*/` will be removed, otherwise the codes will be remained.
 

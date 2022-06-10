@@ -114,7 +114,19 @@ module.exports = {
 
 `isDebug`默认取值为：process.env.NODE_ENV === 'development'
 
-- 任意属性名：boolean
+- changeSource: Function(source, options)
+
+自定义的修改源码函数。可选。比如对于后端为java环境时，将代码中的`.aspx`替换为`.do`：
+````js
+var options = {
+    changeSource: process.env.npm_config_java ? function changeSource(source, options) {
+        return options.isJava ? source.replace(/\.aspx\b/i, '.do') : source
+    } : null
+}
+````
+
+
+- 其他任意属性名：boolean
 
 如果 [属性值] === false，则所有`/\* IFTRUE_属性名` 和 `FITRUE_属性名 \*/`之间的代码都会被移除。 其他情况，这些代码则会被保留。
 
