@@ -26,7 +26,7 @@
   "readme": "readme.md",
   "devDependencies": {
     "jest": "^24.8.0",
-    "loader-utils": "^1.2.3"
+    "loader-utils": "^2.0.3"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
